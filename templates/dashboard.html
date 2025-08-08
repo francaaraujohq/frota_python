@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Controle de Frotas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Controle de Frotas</h2>
+        <a href="{{ url_for('adicionar') }}" class="btn btn-success mb-3">Adicionar Veículo</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger mb-3">Sair</a>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Ano</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for veiculo in veiculos %}
+                <tr>
+                    <td>{{ veiculo.placa }}</td>
+                    <td>{{ veiculo.modelo }}</td>
+                    <td>{{ veiculo.ano }}</td>
+                    <td>
+                        <a href="{{ url_for('editar', id=veiculo.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                        <a href="{{ url_for('deletar', id=veiculo.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza?')">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
